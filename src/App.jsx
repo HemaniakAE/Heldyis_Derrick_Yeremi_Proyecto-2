@@ -1,21 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
 import './App.css'
 import Header from './Components/header'
 import ChessBoard from './Components/ChessBoard'
+import StatsBoard from './Components/StatsBoard'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
-      <Header />   
-      <main>
-        <div className="card">
-          <ChessBoard />
+      <Header />
+      <div className="main-layout">
+        <div className="center-area">
+          <div className="card">
+            <ChessBoard />
+          </div>
         </div>
-      </main>
+        <div className="right-area">
+          <StatsBoard />
+        </div>
+      </div>
     </div>
   )
 }
