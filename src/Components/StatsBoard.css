@@ -1,0 +1,23 @@
+.stats-board {
+  background: #ffffff;
+  border: 2px solid #333;
+  padding: 1.4em;
+  border-radius: 8px;
+  min-width: 220px;
+}
+
+.stats-board h2 {
+  margin-top: 0;
+  font-size: 1.3em;
+  color: #333;
+}
+
+.stats-board table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stats-board td {
+  padding: 0.4em 0.6em;
+  color: #222;
+}
