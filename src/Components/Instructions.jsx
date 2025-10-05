@@ -19,7 +19,7 @@ function Instructions() {
         ],
         en: [
             <>Select the box you want to start</>,
-            <>Press <VscDebugStart /> to start the knight's tour.</>,
+            <>Press <VscDebugStart /> to start the Knight's Tour.</>,
             <>Press <LuPause /> to pause execution.</>,
             <>Press <GrResume /> to resume execution.</>,
             <>Press <VscDebugRestart /> to reset the board.</>,
