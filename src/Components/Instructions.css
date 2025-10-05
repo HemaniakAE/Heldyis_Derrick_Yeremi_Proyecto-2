@@ -1,0 +1,43 @@
+.instructions-box {
+    background: #ffffff;
+    border: 2px solid #333;
+    padding: 1.4em;
+    border-radius: 10px;
+    width: 320px;
+    margin-bottom: 2em;
+    text-align: left;
+}
+
+.instructions-box h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #000000;
+}
+
+.instructions-box ul {
+    padding-left: 1.2em;
+    margin: 0; ;
+}
+
+.instructions-box li {
+    margin-bottom: 0.6em;
+    color: #000000;
+}
+
+.lang-switch {
+  position: absolute;
+  top: 23px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 0.95em;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 5px;
+  transition: background 0.5s;
+}
+
+.lang-switch:hover {
+  background: #adaaaa;
+}

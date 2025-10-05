@@ -1,0 +1,33 @@
+.control-panel {
+    background: #ffffff;
+    border: 2px solid #333;
+    padding: 1.4em;
+    border-radius: 10px;
+    width: 270px;
+}
+
+.control-panel h2 {
+    margin-top: 0;
+    font-size: 1.3em;
+    color: #000000;
+}
+
+.control-panel button {
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 10px;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.control-panel button:hover {
+    background-color: #555;
+}
+
+.control-panel button:active {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
