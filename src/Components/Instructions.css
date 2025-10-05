@@ -1,0 +1,25 @@
+.instructions-box {
+    background: #ffffff;
+    border: 2px solid #333;
+    padding: 1.4em;
+    border-radius: 10px;
+    min-width: 220px;
+    margin-bottom: 2em;
+    text-align: left;
+}
+
+.instructions-box h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #000000;
+}
+
+.instructions-box ul {
+    padding-left: 1.2em;
+    margin: 0; ;
+}
+
+.instructions-box li {
+    margin-bottom: 0.6em;
+    color: #000000;
+}

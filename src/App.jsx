@@ -4,6 +4,7 @@ import Header from './Components/header'
 import ChessBoard from './Components/ChessBoard'
 import StatsBoard from './Components/StatsBoard'
 import ControlPanel from './Components/ControlPanel'
+import Instructions from './Components/Instructions'
 
 function App() {
   const [paused, setPaused] = useState(false);
@@ -29,6 +30,9 @@ function App() {
             Pause={handlePauseResume}
             paused={paused} 
           />
+        </div>
+        <div className='left-area'>
+          <Instructions />
         </div>
       </div>
     </div>
