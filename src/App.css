@@ -20,11 +20,11 @@ main {
 
 .right-area {
   position: fixed;
-  top: 50%;
+  top: 38%;
   right: 0;
   transform: translateY(-50%);
   z-index: 100;
-  padding-right: 6.5%;
+  padding-right: 5%;
 }
 
 .card {
