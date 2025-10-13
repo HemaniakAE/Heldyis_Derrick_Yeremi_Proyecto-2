@@ -15,15 +15,17 @@ function Instructions() {
             <>Presiona <LuPause /> para pausar el recorrido</>,
             <>Presiona <GrResume /> para reanudar el recorrido</>,
             <>Presiona <VscDebugRestart /> para reiniciar el tablero</>,
-            <>Observa las estadísticas a la derecha</>
+            <>Observa las estadísticas a la derecha</>,
+            <>Seleccione el tamaño del tablero en el control panel</>
         ],
         en: [
             <>Select the box you want to start</>,
-            <>Press <VscDebugStart /> to start the Knight's Tour.</>,
+            <>Press <VscDebugStart /> to start the Knight's Tour</>,
             <>Press <LuPause /> to pause execution.</>,
             <>Press <GrResume /> to resume execution.</>,
-            <>Press <VscDebugRestart /> to reset the board.</>,
-            <>Check the statistics on the right.</>
+            <>Press <VscDebugRestart /> to reset the board</>,
+            <>Check the statistics on the right</>,
+            <>Select the board size in the control panel</>
         ]
     };
 
