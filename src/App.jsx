@@ -5,6 +5,7 @@ import ChessBoard from './Components/ChessBoard'
 import StatsBoard from './Components/StatsBoard'
 import ControlPanel from './Components/ControlPanel'
 import Instructions from './Components/Instructions'
+import ResetButton from './Components/ResetButton'
 
 function App() {
   const [paused, setPaused] = useState(false);
@@ -14,9 +15,19 @@ function App() {
   const handleStart = () => {};   // función vacía temporal
   const handleReboot = () => {};  // función vacía temporal
 
+  const resetearTodo = () => {
+    setLimit("");
+    setNumbers([]);
+    setInitialPop([]);
+    setBestSolution([]);
+    setBestSum(null);
+    setBestGen(null);
+  };
+
   return (
     <div className="App">
       <Header />
+      <ResetButton onReset={resetearTodo} />
       <div className="left-area">
         <Instructions />
       </div>

@@ -43,6 +43,44 @@ main {
   align-items: center;
 }
 
+.reset-button {
+  position: absolute;
+  left: 50px;
+  top: 12%;
+  width: 100px;
+  height: 100px;
+  transform: translateY(-50%);
+  padding: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reset-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.05);
+  border: transparent;
+}
+
+.reset-button img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  filter: invert(1);
+}
+
 .card {
   padding: 2em;
+}
+
+@media (prefers-color-scheme: light) {
+  .reset-button img {
+    filter: invert(0);
+  }
 }
