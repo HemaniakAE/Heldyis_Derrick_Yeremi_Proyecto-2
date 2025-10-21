@@ -20,7 +20,7 @@ main {
 
 .right-area {
   position: fixed;
-  top: 51%;
+  top: 54%;
   right: 0;
   transform: translateY(-50%);
   z-index: 100;
@@ -33,7 +33,7 @@ main {
 
 .left-area {
   position: fixed;
-  top: 45%;
+  top: 49%;
   left: 0;
   transform: translateY(-50%);
   z-index: 100;

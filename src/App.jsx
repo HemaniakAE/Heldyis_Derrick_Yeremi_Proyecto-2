@@ -8,6 +8,7 @@ import Instructions from './Components/Instructions'
 
 function App() {
   const [paused, setPaused] = useState(false);
+  const [size, setSize] = useState(7); //Tamaño predeterminado de la matriz
 
   const handlePauseResume = () => setPaused(prev => !prev);
   const handleStart = () => {};   // función vacía temporal
@@ -16,27 +17,25 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="main-layout">
-        <div className="center-area">
-          <div className="card">
-            <ChessBoard />
-          </div>
-        </div>
-        <div className="right-area">
-          <StatsBoard />
-          <ControlPanel 
-            Start={handleStart}
-            Reboot={handleReboot}
-            Pause={handlePauseResume}
-            paused={paused} 
-          />
-        </div>
-        <div className='left-area'>
-          <Instructions />
-        </div>
+      <div className="left-area">
+        <Instructions />
+      </div>
+      <div className="right-area">
+        <StatsBoard />
+        <ControlPanel
+          Start={handleStart}
+          Reboot={handleReboot}
+          Pause={handlePauseResume}
+          paused={paused}
+          size={size}
+          setSize={setSize}
+        />
+      </div>
+      <div className="card">
+        <ChessBoard size={size} />
       </div>
     </div>
-  )
+  );
 }
 
 export default App

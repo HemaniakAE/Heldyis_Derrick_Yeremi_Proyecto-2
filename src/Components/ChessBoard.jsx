@@ -1,17 +1,15 @@
 import React from 'react';
 import './ChessBoard.css';
 
-const SIZE = 7;
-
-function ChessBoard() {
+function ChessBoard({size}) {
   return (
     <div
       className="chessboard"
-      style={{ '--size': SIZE }}
+      style={{ '--size': size }}
     >
-      {Array.from({ length: SIZE * SIZE }).map((_, idx) => {
-        const row = Math.floor(idx / SIZE);
-        const col = idx % SIZE;
+      {Array.from({ length: size * size }).map((_, idx) => {
+        const row = Math.floor(idx / size);
+        const col = idx % size;
         const isBlack = (row + col) % 2 === 1;
         return (
           <div
