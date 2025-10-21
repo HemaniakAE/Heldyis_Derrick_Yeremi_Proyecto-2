@@ -19,6 +19,7 @@
     font-size: 1.3em;
     border: none;
     border-radius: 10px;
+    transition: 0.25s;
     background-color: #000000;
     color: #ffffff;
     cursor: pointer;
@@ -26,6 +27,8 @@
 
 .control-panel button:hover {
     background-color: #555;
+    transform: scale(1.2);
+    box-shadow: 0 0 12px #313439;
 }
 
 .control-panel button:active {
@@ -62,4 +65,6 @@
 .control-panel select:hover {
     background-color: #555;
     color: #ffffff;
+    transform: scale(1);
+    box-shadow: 0 0 12px #313439
 }
