@@ -21,11 +21,11 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
-  transition: all 0.15s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .chessboard-cell:hover {
-  transform: scale(1.05);
+  transform: scale(1.09);
   box-shadow: 0 0 6px rgb(0, 191, 255);
   z-index: 1;
 }

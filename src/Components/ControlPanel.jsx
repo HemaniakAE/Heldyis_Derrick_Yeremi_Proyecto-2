@@ -10,7 +10,6 @@ function ControlPanel({ Start, Pause, Reboot, paused, size, setSize }) {
     <div className="control-panel">
       <h2>Control Panel</h2>
       <div className="actions">
-        Sizes:&nbsp;
         <select value={size} title="Elegir tamaño" onChange={(e) => setSize(Number(e.target.value))}>
           <option value={4}>4x4</option>
           <option value={5}>5x5</option>

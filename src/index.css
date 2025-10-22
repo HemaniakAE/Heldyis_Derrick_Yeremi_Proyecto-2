@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background: linear-gradient(135deg, #242424, #000000);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -56,7 +56,7 @@ button:focus-visible {
 
 .header {
   color: white;
-  background: #242424;
+  background: transparent;
 }
 
 .header-logo {
@@ -66,14 +66,14 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #cacaca, #ffffff);
   }
   a:hover {
     color: #747bff;
   }
   .header {
     color: #000000;
-    background: #ffffff;
+    background: transparent;
   }
   .header-logo {
     filter: invert(0); 

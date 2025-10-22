@@ -60,6 +60,7 @@
     border: 1px solid #333;
     cursor: pointer;
     background-color: #000000;
+    color: white    ;
 }
 
 .control-panel select:hover {
