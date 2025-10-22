@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { GiChessKnight } from "react-icons/gi";
 import "./ChessBoard.css";
 
-function ChessBoard({ size }) {
-  const [selectedCell, setSelectedCell] = useState(null);
-
-  const handleCellClick = (row, col) => {
-    setSelectedCell({ row, col });
-  };
-
+function ChessBoard({ size, selectedCell, onCellClick }) {
   return (
     <div
       className="chessboard"
@@ -23,16 +17,16 @@ function ChessBoard({ size }) {
 
         return (
           <div
-            key={idx}
+            key={`${row}-${col}`}
             className={`chessboard-cell ${isBlack ? "black" : "white"} ${
               isSelected ? "select" : ""
             }`}
-            onClick={() => handleCellClick(row, col)}
+            onClick={() => onCellClick({ row, col })}
           >
             {isSelected && (
               <GiChessKnight
                 size={64}
-                color={isBlack ? "white" : "black"} // Cambia de color al caballo dependiendo del color de fondo
+                color={isBlack ? "white" : "black"}
                 strokeWidth={2.5}
               />
             )}

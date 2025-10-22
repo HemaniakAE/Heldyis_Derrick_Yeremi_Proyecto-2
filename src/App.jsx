@@ -8,29 +8,22 @@ import Instructions from './Components/Instructions'
 import ResetButton from './Components/ResetButton'
 
 function App() {
-  const [startPos, setStartPos] = useState(null);
-
-  const handleCellClick = (row, col) => {
-    console.log(`Casilla seleccionada: fila ${row}, columna ${col}`);
-    setStartPos({ row, col });
-  };
-
-
-
   const [paused, setPaused] = useState(false);
   const [size, setSize] = useState(7); //Tamaño predeterminado de la matriz
+  const [selectedCell, setSelectedCell] = useState(null);
+  const [moves, setMoves] = useState(0);
+  const [backtracks, setBacktracks] = useState(0);
+  const [time, setTime] = useState(0);
 
   const handlePauseResume = () => setPaused(prev => !prev);
   const handleStart = () => {};   // función vacía temporal
   const handleReboot = () => {};  // función vacía temporal
 
   const resetearTodo = () => {
-    setLimit("");
-    setNumbers([]);
-    setInitialPop([]);
-    setBestSolution([]);
-    setBestSum(null);
-    setBestGen(null);
+    setSelectedCell(null);
+    setMoves(0);
+    setBacktracks(0);
+    setTime(0);
   };
 
   return (
@@ -41,7 +34,7 @@ function App() {
         <Instructions />
       </div>
       <div className="right-area">
-        <StatsBoard />
+        <StatsBoard moves={moves} backtracks={backtracks} time={time} />
         <ControlPanel
           Start={handleStart}
           Reboot={handleReboot}
@@ -52,15 +45,11 @@ function App() {
         />
       </div>
       <div className="card">
-        <ChessBoard size={size} 
-        selectedCell={startPos}
-        onCellClick={handleCellClick}
-        />
-        {startPos && (
-        <p>
-          Posición seleccionada → fila {startPos.row}, columna {startPos.col}
-        </p>
-        )}
+        <ChessBoard 
+        size={size} 
+        selectedCell={selectedCell}
+        onCellClick={setSelectedCell}
+      />
       </div>
     </div>
   );
