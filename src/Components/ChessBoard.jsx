@@ -31,7 +31,7 @@ function ChessBoard({ size }) {
           >
             {isSelected && (
               <GiChessKnight
-                size={32}
+                size={64}
                 color={isBlack ? "white" : "black"} // Cambia de color al caballo dependiendo del color de fondo
                 strokeWidth={2.5}
               />
