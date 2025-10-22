@@ -1,30 +1,25 @@
 let move_x = [2, 1, -1, -2, -2, -1, 1, 2];
 let move_y = [1, 2, 2, 1, -1, -2, -2, -1];
 
-let statistics = {
-    moveTries: 0,
-    backtracks: 0
-};
-
 function validateMove(bo, row, col, n) {
     if (row < n && row >= 0 && col < n && col >= 0 && bo[row][col] === 0) {
         return true;
     }
+    return false;
 }
 
-function solve(bo, row, col, n, counter) {
-    if (counter > n*n) {
+function solve(bo, row, col, n, counter, statistics) {
+    if (counter > n * n) {
         return true;
     }
 
-    
     for (let i = 0; i < 8; i++) {
         let new_x = row + move_x[i];
         let new_y = col + move_y[i];
         if (validateMove(bo, new_x, new_y, n)) {
             statistics.moveTries++;
             bo[new_x][new_y] = counter;
-            if (solve(bo,new_x, new_y, n, counter+1)) {
+            if (solve(bo, new_x, new_y, n, counter + 1, statistics)) {
                 return true;
             }
             statistics.backtracks++;
@@ -34,6 +29,31 @@ function solve(bo, row, col, n, counter) {
     return false;
 }
 
+
+export function solveKnightsTour(n, start_row, start_col) {
+    let board = Array.from({ length: n }, () => Array(n).fill(0));
+    let statistics = {
+        moveTries: 0,
+        backtracks: 0
+    };
+
+    const startTime = performance.now();
+    board[start_row][start_col] = 1;
+
+    const success = solve(board, start_row, start_col, n, 2, statistics);
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+
+    return {
+        success,
+        board,
+        statistics,
+        executionTime,
+        sum: success ? board.flat().reduce((a, b) => a + b, 0) : 0
+    };
+}
+
+/*
 let n = 6;
 let board = Array.from({length : n}, () => Array(n).fill(0));
 let [start_row, start_col] = [2,2];
@@ -62,3 +82,4 @@ if (solve(board, start_row, start_col, n, 2)) {
     console.log(`   Movimientos intentados: ${statistics.moveTries}`);
     console.log(`   Backtracks realizados: ${statistics.backtracks}`);
 }
+*/

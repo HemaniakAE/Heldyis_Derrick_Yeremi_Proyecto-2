@@ -8,6 +8,15 @@ import Instructions from './Components/Instructions'
 import ResetButton from './Components/ResetButton'
 
 function App() {
+  const [startPos, setStartPos] = useState(null);
+
+  const handleCellClick = (row, col) => {
+    console.log(`Casilla seleccionada: fila ${row}, columna ${col}`);
+    setStartPos({ row, col });
+  };
+
+
+
   const [paused, setPaused] = useState(false);
   const [size, setSize] = useState(7); //Tamaño predeterminado de la matriz
 
@@ -43,7 +52,15 @@ function App() {
         />
       </div>
       <div className="card">
-        <ChessBoard size={size} />
+        <ChessBoard size={size} 
+        selectedCell={startPos}
+        onCellClick={handleCellClick}
+        />
+        {startPos && (
+        <p>
+          Posición seleccionada → fila {startPos.row}, columna {startPos.col}
+        </p>
+        )}
       </div>
     </div>
   );
