@@ -64,7 +64,7 @@ main {
 .reset-button:hover {
   background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
-  transform: translateY(-50%) scale(1.05);
+  transform: translateY(-50%) scale(1.2);
   border: transparent;
 }
 
