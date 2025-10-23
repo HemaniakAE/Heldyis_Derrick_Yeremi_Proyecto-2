@@ -6,7 +6,7 @@ import StatsBoard from './Components/StatsBoard';
 import ControlPanel from './Components/ControlPanel';
 import Instructions from './Components/Instructions';
 import ResetButton from './Components/ResetButton';
-import { solveKnightsTour } from './backtracking/Backtracking';
+import { solveKnightsTour, solveKnightsTourClosed } from './backtracking/Backtracking'; // ✅ import correcto
 
 function App() {
   const [paused, setPaused] = useState(false);
@@ -18,36 +18,43 @@ function App() {
   const [backtracks, setBacktracks] = useState(0);
   const [time, setTime] = useState(0);
 
+  // 🔸 Pausar/Reanudar
   const handlePauseResume = () => setPaused(prev => !prev);
 
-  // Ejecutar recorrido abierto
+  // ▶️ Ejecutar recorrido (abierto o cerrado)
   const handleStart = () => {
     if (!selectedCell) {
-      alert("Seleccione la casilla inicial");
+      alert("Seleccione una casilla inicial en el tablero.");
       return;
     }
 
     const startRow = selectedCell.row;
     const startCol = selectedCell.col;
 
+    let result;
+
+    // 🟢 Recorrido Abierto
     if (mode === "Open") {
-      const result = solveKnightsTour(size, startRow, startCol);
-
-      if (!result.success) {
-        alert("Sin solucion par el punto que selecciono");
-        return;
-      }
-
-      // Actualizar tablero y estadísticas
-      setBoard(result.board);
-      setMoves(result.statistics.moveTries);
-      setBacktracks(result.statistics.backtracks);
-      setTime(result.executionTime.toFixed(2));
-    } else {
+      result = solveKnightsTour(size, startRow, startCol);
     }
+
+    // 🔵 Recorrido Cerrado
+    else if (mode === "Close") {
+      result = solveKnightsTourClosed(size, startRow, startCol);
+    }
+
+    if (!result || !result.success) {
+      alert("No se encontró una solución para este punto de inicio.");
+      return;
+    }
+
+    setBoard(result.board);
+    setMoves(result.statistics.moveTries);
+    setBacktracks(result.statistics.backtracks);
+    setTime(result.executionTime.toFixed(2));
   };
 
-  // Reiniciar todo
+  // 🔁 Reiniciar tablero
   const handleReboot = () => {
     setBoard([]);
     setSelectedCell(null);
@@ -56,7 +63,7 @@ function App() {
     setTime(0);
   };
 
-  // reiniciar ejecucion
+  // 🔄 Reinicio completo (botón del caballo)
   const resetearTodo = () => {
     setBoard([]);
     setSelectedCell(null);
