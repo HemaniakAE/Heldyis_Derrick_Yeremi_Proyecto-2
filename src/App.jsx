@@ -10,6 +10,7 @@ import ResetButton from './Components/ResetButton'
 function App() {
   const [paused, setPaused] = useState(false);
   const [size, setSize] = useState(7); //Tamaño predeterminado de la matriz
+  const [mode, setMode] = useState("Abierto");
   const [selectedCell, setSelectedCell] = useState(null);
   const [moves, setMoves] = useState(0);
   const [backtracks, setBacktracks] = useState(0);
@@ -41,7 +42,9 @@ function App() {
           Pause={handlePauseResume}
           paused={paused}
           size={size}
+          mode={mode}
           setSize={setSize}
+          setMode={setMode}
         />
       </div>
       <div className="card">
