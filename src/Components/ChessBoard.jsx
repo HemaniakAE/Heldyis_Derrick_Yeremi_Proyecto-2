@@ -2,7 +2,7 @@ import React from "react";
 import { GiChessKnight } from "react-icons/gi";
 import "./ChessBoard.css";
 
-function ChessBoard({ size, selectedCell, onCellClick }) {
+function ChessBoard({ size, selectedCell, onCellClick, board }) {
   return (
     <div
       className="chessboard"
@@ -12,17 +12,28 @@ function ChessBoard({ size, selectedCell, onCellClick }) {
         const row = Math.floor(idx / size);
         const col = idx % size;
         const isBlack = (row + col) % 2 === 1;
-        const isSelected =
-          selectedCell?.row === row && selectedCell?.col === col;
+        const isSelected = selectedCell?.row === row && selectedCell?.col === col;
+        const hasBoard = board && board.length > 0;
+        const moveNumber = hasBoard ? board[row][col] : null;
 
         return (
           <div
             key={`${row}-${col}`}
-            className={`chessboard-cell ${isBlack ? "black" : "white"} ${
-              isSelected ? "select" : ""
-            }`}
-            onClick={() => onCellClick({ row, col })}
+            className={`chessboard-cell ${isBlack ? "black" : "white"} ${isSelected ? "select" : ""}`}
+            onClick={() => !hasBoard && onCellClick({ row, col })}
           >
+            {hasBoard && moveNumber >= 0 && (
+              <span
+                style={{
+                  color: isBlack ? "white" : "black",
+                  fontWeight: "bold",
+                  fontSize: "1.3em",
+                }}
+              >
+                {moveNumber}
+              </span>
+            )}
+
             {isSelected && (
               <GiChessKnight
                 size={64}
