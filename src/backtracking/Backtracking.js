@@ -1,6 +1,8 @@
 let move_x = [2, 1, -1, -2, -2, -1, 1, 2];
 let move_y = [1, 2, 2, 1, -1, -2, -2, -1];
 
+
+
 function validateMove(bo, row, col, n) {
     if (row < n && row >= 0 && col < n && col >= 0 && bo[row][col] === 0) {
         return true;
@@ -8,8 +10,19 @@ function validateMove(bo, row, col, n) {
     return false;
 }
 
-function solve(bo, row, col, n, counter, statistics) {
+function solve(bo, srow, scol, n, counter,closed, statistics,row=srow,col=scol) {
+    
     if (counter > n * n) {
+        if (closed) {
+            for (let i = 0; i < 8; i++) {
+                let new_x = row + move_x[i];
+                let new_y = col + move_y[i];
+                if (new_x === srow && new_y === scol) {
+                    return true;
+                }
+            }
+            return false;
+        }   
         return true;
     }
 
@@ -19,7 +32,7 @@ function solve(bo, row, col, n, counter, statistics) {
         if (validateMove(bo, new_x, new_y, n)) {
             statistics.moveTries++;
             bo[new_x][new_y] = counter;
-            if (solve(bo, new_x, new_y, n, counter + 1, statistics)) {
+            if (solve(bo, srow , scol , n, counter + 1,closed , statistics, new_x, new_y)) {
                 return true;
             }
             statistics.backtracks++;
@@ -51,21 +64,20 @@ export function solveKnightsTour(n, start_row, start_col) {
         executionTime,
         sum: success ? board.flat().reduce((a, b) => a + b, 0) : 0
     };
-}
+} 
 
-/*
+
 let n = 6;
 let board = Array.from({length : n}, () => Array(n).fill(0));
-let [start_row, start_col] = [2,2];
+let [start_row, start_col] = [2, 5];
 
 // Reiniciar estadísticas
-statistics.moveTries = 0;
-statistics.backtracks = 0;
+
 
 console.time("Tiempo de ejecución");
 board[start_row][start_col] = 1;
 
-if (solve(board, start_row, start_col, n, 2)) {
+if (solve(board, start_row,start_col, n, 2 , true, statistics)) {
     console.timeEnd("Tiempo de ejecución");
     let suma = board.flat().reduce((a, b) => a + b, 0);
     console.log(`\nSolución encontrada para tablero ${n}x${n}`);
@@ -82,4 +94,4 @@ if (solve(board, start_row, start_col, n, 2)) {
     console.log(`   Movimientos intentados: ${statistics.moveTries}`);
     console.log(`   Backtracks realizados: ${statistics.backtracks}`);
 }
-*/
+
