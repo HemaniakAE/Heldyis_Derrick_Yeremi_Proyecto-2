@@ -1,0 +1,71 @@
+.control-panel {
+    background: #ffffff;
+    border: 2px solid #333;
+    padding: 1.4em;
+    border-radius: 10px;
+    width: 270px;
+}
+
+.control-panel h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.3em;
+    color: #000000;
+}
+
+.control-panel button {
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 10px;
+    transition: 0.25s;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.control-panel button:hover {
+    background-color: #555;
+    transform: scale(1.2);
+    box-shadow: 0 0 12px #313439;
+}
+
+.control-panel button:active {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+
+.control-panel select {
+    margin-right: 6.5em;
+    font-size: 1em;
+    padding: 0.2em 0.3em;
+    border-radius: 5px;
+    border: 1px solid #333;
+    cursor: pointer;
+    background-color: #000000;
+    color: white    ;
+}
+
+.control-panel select:hover {
+    background-color: #555;
+    color: #ffffff;
+    transform: scale(1);
+    box-shadow: 0 0 12px #313439
+}

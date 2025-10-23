@@ -1,7 +1,7 @@
 import React from 'react';
 import './StatsBoard.css';
 
-function StatsBoard({ moves = 0, backtracks = 0, time = 0 }) {
+function StatsBoard({ moves, backtracks, time }) {
   return (
     <div className="stats-board">
       <h2>Statistics</h2>
