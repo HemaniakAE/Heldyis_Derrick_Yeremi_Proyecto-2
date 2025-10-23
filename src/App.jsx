@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './App.css'
-import Header from './Components/header'
+import Header from './Components/Header'
 import ChessBoard from './Components/ChessBoard'
 import StatsBoard from './Components/StatsBoard'
 import ControlPanel from './Components/ControlPanel'
