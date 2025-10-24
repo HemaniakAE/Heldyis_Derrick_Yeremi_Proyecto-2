@@ -20,7 +20,7 @@ main {
 
 .right-area {
   position: absolute;
-  top: 54.5%;
+  top: 56.5%;
   right: 0;
   transform: translateY(-50%);
   z-index: 100;
@@ -33,7 +33,7 @@ main {
 
 .left-area {
   position: absolute;
-  top: 48.5%;
+  top: 48.6%;
   left: 0;
   transform: translateY(-50%);
   z-index: 100;
