@@ -6,7 +6,7 @@ import StatsBoard from './Components/StatsBoard';
 import ControlPanel from './Components/ControlPanel';
 import Instructions from './Components/Instructions';
 import ResetButton from './Components/ResetButton';
-import { solveKnightsTour, solveKnightsTourClosed } from './backtracking/Backtracking'; // ✅ import correcto
+import { solveKnightsTour, solveKnightsTourClosed } from './backtracking/Backtracking'; 
 
 function App() {
   const [paused, setPaused] = useState(false);
@@ -18,10 +18,10 @@ function App() {
   const [backtracks, setBacktracks] = useState(0);
   const [time, setTime] = useState(0);
 
-  // 🔸 Pausar/Reanudar
+  // Pausar/Reanudar
   const handlePauseResume = () => setPaused(prev => !prev);
 
-  // ▶️ Ejecutar recorrido (abierto o cerrado)
+  // Ejecutar recorrido
   const handleStart = () => {
     if (!selectedCell) {
       alert("Seleccione una casilla inicial en el tablero.");
@@ -33,12 +33,12 @@ function App() {
 
     let result;
 
-    // 🟢 Recorrido Abierto
+    // Abierto
     if (mode === "Open") {
       result = solveKnightsTour(size, startRow, startCol);
     }
 
-    // 🔵 Recorrido Cerrado
+    // Cerrado
     else if (mode === "Close") {
       result = solveKnightsTourClosed(size, startRow, startCol);
     }
@@ -54,16 +54,15 @@ function App() {
     setTime(result.executionTime.toFixed(2));
   };
 
-  // 🔁 Reiniciar tablero
+  // Reiniciar ejecución
   const handleReboot = () => {
     setBoard([]);
-    setSelectedCell(null);
     setMoves(0);
     setBacktracks(0);
     setTime(0);
   };
 
-  // 🔄 Reinicio completo (botón del caballo)
+  // Reinicio completo de la ventana
   const resetearTodo = () => {
     setBoard([]);
     setSelectedCell(null);
