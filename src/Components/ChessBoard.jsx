@@ -27,7 +27,7 @@ function ChessBoard({ size, selectedCell, onCellClick, board }) {
                 style={{
                   color: isBlack ? "white" : "black",
                   fontWeight: "bold",
-                  fontSize: "1.3em",
+                  fontSize: "0.8em",
                 }}
               >
                 {moveNumber}
