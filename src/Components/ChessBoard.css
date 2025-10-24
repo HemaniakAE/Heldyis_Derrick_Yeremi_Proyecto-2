@@ -39,5 +39,5 @@
 }
 
 .chessboard-cell.select {
-  outline: 3px solid blue;
+  outline: 3px solid rgba(12, 141, 216, 0.705);
 }
