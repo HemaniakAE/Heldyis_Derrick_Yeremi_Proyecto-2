@@ -14,6 +14,7 @@ function App() {
   const [mode, setMode] = useState("Open");
   const [selectedCell, setSelectedCell] = useState(null);
   const [board, setBoard] = useState([]);
+  const [backtrackedCells, setBacktrackedCells] = useState([]);
   const [moves, setMoves] = useState(0);
   const [backtracks, setBacktracks] = useState(0);
   const [time, setTime] = useState(0);
@@ -22,7 +23,7 @@ function App() {
   const handlePauseResume = () => setPaused(prev => !prev);
 
   // Ejecutar recorrido
-  const handleStart = () => {
+  const handleStart = async () => {
     if (!selectedCell) {
       alert("Seleccione una casilla inicial en el tablero.");
       return;
@@ -31,16 +32,51 @@ function App() {
     const startRow = selectedCell.row;
     const startCol = selectedCell.col;
 
+    // Visualization delay in ms (0 = instant, increase to slow down)
+    const visualizationDelay = 40;
+
+  // clear previous board/state while running
+  setBoard([]);
+  setBacktrackedCells([]);
+  setMoves(0);
+  setBacktracks(0);
+  setTime(0);
+
     let result;
+
+    // onSelect handler used by the backtracking algorithm to update UI during animation
+    const onSelectHandler = async (info) => {
+      // info: { row, col, board, move, backtracked }
+      if (info?.board) {
+        setBoard(info.board);
+        // remove any cells from backtracked that have been visited again
+        setBacktrackedCells((prev) => prev.filter((k) => {
+          const [r, c] = k.split('-').map(Number);
+          return !(info.board[r] && info.board[r][c] > 0);
+        }));
+      }
+
+      if (typeof info?.row === 'number' && typeof info?.col === 'number') {
+        setSelectedCell({ row: info.row, col: info.col });
+      }
+
+      if (info?.backtracked) {
+        const key = `${info.backtracked.row}-${info.backtracked.col}`;
+        setBacktrackedCells((prev) => (prev.includes(key) ? prev : [...prev, key]));
+      }
+
+      // return a resolved promise so the algorithm can await this handler
+      return Promise.resolve();
+    };
 
     // Abierto
     if (mode === "Open") {
-      result = solveKnightsTour(size, startRow, startCol);
+      result = await solveKnightsTour(size, startRow, startCol, onSelectHandler, visualizationDelay);
     }
 
     // Cerrado
     else if (mode === "Close") {
-      result = solveKnightsTourClosed(size, startRow, startCol);
+      result = await solveKnightsTourClosed(size, startRow, startCol, onSelectHandler, visualizationDelay);
     }
 
     if (!result || !result.success) {
@@ -57,6 +93,7 @@ function App() {
   // Reiniciar ejecución
   const handleReboot = () => {
     setBoard([]);
+    setBacktrackedCells([]);
     setMoves(0);
     setBacktracks(0);
     setTime(0);
@@ -66,6 +103,7 @@ function App() {
   const resetearTodo = () => {
     setBoard([]);
     setSelectedCell(null);
+    setBacktrackedCells([]);
     setMoves(0);
     setBacktracks(0);
     setTime(0);
@@ -100,6 +138,7 @@ function App() {
           selectedCell={selectedCell}
           onCellClick={setSelectedCell}
           board={board}
+          backtrackedCells={backtrackedCells}
         />
       </div>
     </div>

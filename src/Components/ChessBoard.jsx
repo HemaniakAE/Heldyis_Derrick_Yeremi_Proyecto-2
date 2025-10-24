@@ -2,7 +2,7 @@ import React from "react";
 import { GiChessKnight } from "react-icons/gi";
 import "./ChessBoard.css";
 
-function ChessBoard({ size, selectedCell, onCellClick, board }) {
+function ChessBoard({ size, selectedCell, onCellClick, board, backtrackedCells = [] }) {
   return (
     <div
       className="chessboard"
@@ -12,20 +12,23 @@ function ChessBoard({ size, selectedCell, onCellClick, board }) {
         const row = Math.floor(idx / size);
         const col = idx % size;
         const isBlack = (row + col) % 2 === 1;
-        const isSelected = selectedCell?.row === row && selectedCell?.col === col;
-        const hasBoard = board && board.length > 0;
-        const moveNumber = hasBoard ? board[row][col] : null;
+  const isSelected = selectedCell?.row === row && selectedCell?.col === col;
+  const hasBoard = board && board.length > 0;
+  const moveNumber = hasBoard ? board[row][col] : null;
+  const isVisited = hasBoard && typeof moveNumber === 'number' && moveNumber > 0;
+  const key = `${row}-${col}`;
+  const isBacktracked = !isVisited && backtrackedCells && backtrackedCells.includes(key);
 
         return (
           <div
             key={`${row}-${col}`}
-            className={`chessboard-cell ${isBlack ? "black" : "white"} ${isSelected ? "select" : ""}`}
+            className={`chessboard-cell ${isBlack ? "black" : "white"} ${isSelected ? "select" : ""} ${isVisited ? 'visited' : ''} ${isBacktracked ? 'backtracked' : ''}`}
             onClick={() => !hasBoard && onCellClick({ row, col })}
           >
-            {hasBoard && moveNumber >= 0 && (
+            {hasBoard && moveNumber > 0 && (
               <span
                 style={{
-                  color: isBlack ? "white" : "black",
+                  color: isVisited ? 'white' : (isBlack ? "white" : "black"),
                   fontWeight: "bold",
                   fontSize: "0.8em",
                 }}
@@ -37,7 +40,7 @@ function ChessBoard({ size, selectedCell, onCellClick, board }) {
             {isSelected && (
               <GiChessKnight
                 size={64}
-                color={isBlack ? "white" : "black"}
+                color={isVisited ? 'white' : (isBlack ? "white" : "black")}
                 strokeWidth={2.5}
               />
             )}

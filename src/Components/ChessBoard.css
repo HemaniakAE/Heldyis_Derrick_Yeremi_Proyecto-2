@@ -41,3 +41,15 @@
 .chessboard-cell.select {
   outline: 3px solid rgba(12, 141, 216, 0.705);
 }
+
+.chessboard-cell.visited {
+  /* visited cells become green */
+  background: #4caf50 !important;
+  color: white;
+}
+
+.chessboard-cell.backtracked {
+  /* backtracked cells become red */
+  background: #e53935 !important;
+  color: white;
+}
