@@ -1,11 +1,12 @@
 import React from "react";
 import './ControlPanel.css'
 import { VscDebugStart } from "react-icons/vsc";
+import { BsSkipForward } from "react-icons/bs";
 import { VscDebugRestart } from "react-icons/vsc";
 import { LuPause } from "react-icons/lu";
 import { GrResume } from "react-icons/gr";
 
-function ControlPanel({ Start, Pause, Reboot, paused, size, setSize, mode, setMode }) {
+function ControlPanel({ Start, Pause, Reboot, paused, started, size, setSize, mode, setMode }) {
   return (
     <div className="control-panel">
       <h2>Control Panel</h2>
@@ -23,8 +24,8 @@ function ControlPanel({ Start, Pause, Reboot, paused, size, setSize, mode, setMo
           </select>
         </div>
         <div className="buttons">
-          <button onClick={Start} title="Iniciar">
-            <VscDebugStart />
+          <button onClick={Start} title={started ? "Saltar" : "Iniciar"}>
+            {started ? <BsSkipForward /> : <VscDebugStart />}
           </button>
           <button onClick={Reboot} title="Reiniciar">
             <VscDebugRestart />

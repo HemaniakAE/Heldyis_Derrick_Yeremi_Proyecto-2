@@ -9,6 +9,7 @@ import ResetButton from './Components/ResetButton';
 import { solveKnightsTour, solveKnightsTourClosed } from './backtracking/Backtracking'; 
 
 function App() {
+  const [started, setStart] =useState(false);
   const [paused, setPaused] = useState(false);
   const [size, setSize] = useState(7); // Tamaño predeterminado
   const [mode, setMode] = useState("Open");
@@ -19,16 +20,19 @@ function App() {
   const [backtracks, setBacktracks] = useState(0);
   const [time, setTime] = useState(0);
 
+  //Iniciar/saltar
+  //const handleStartSkip = () => setStart(prev => !prev);
+
   // Pausar/Reanudar
   const handlePauseResume = () => setPaused(prev => !prev);
 
   // Ejecutar recorrido
-  const handleStart = async () => {
+  const handleStartSkip = async () => {
     if (!selectedCell) {
       alert("Seleccione una casilla inicial en el tablero.");
       return;
     }
-
+    setStart(true)
     const startRow = selectedCell.row;
     const startCol = selectedCell.col;
 
@@ -85,6 +89,7 @@ function App() {
     setMoves(result.statistics.moveTries);
     setBacktracks(result.statistics.backtracks);
     setTime(result.executionTime.toFixed(2));
+    setStart(false);
   };
 
   // Reiniciar ejecución
@@ -118,10 +123,11 @@ function App() {
       <div className="right-area">
         <StatsBoard moves={moves} backtracks={backtracks} time={time} />
         <ControlPanel
-          Start={handleStart}
+          Start={handleStartSkip}
           Reboot={handleReboot}
           Pause={handlePauseResume}
           paused={paused}
+          started={started}
           size={size}
           mode={mode}
           setSize={setSize}
