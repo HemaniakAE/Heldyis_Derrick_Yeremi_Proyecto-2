@@ -26,6 +26,22 @@ function App() {
 
   const handlePauseResume = () => setPaused(prev => !prev);
 
+  const handleSizeChange = (newSize) => {
+    if (executingRef.current || board.length > 0) {
+      alert("No puede cambiar el tamaño durante o después de la ejecución. Presione el botón de reiniciar primero.");
+      return;
+    }
+    setSize(newSize);
+  };
+
+  const handleModeChange = (newMode) => {
+    if (executingRef.current || board.length > 0) {
+      alert("No puede cambiar el modo durante o después de la ejecución. Presione el botón de reiniciar primero.");
+      return;
+    }
+    setMode(newMode);
+  };
+
   const handleStartSkip = async () => {
     if (!selectedCell) {
       alert("Seleccione una casilla inicial en el tablero.");
@@ -252,8 +268,8 @@ function App() {
           started={started}
           size={size}
           mode={mode}
-          setSize={setSize}
-          setMode={setMode}
+          setSize={handleSizeChange}
+          setMode={handleModeChange}
         />
       </div>
 
