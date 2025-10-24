@@ -22,6 +22,7 @@ function App() {
   
   const executingRef = useRef(false);
   const initialCellRef = useRef(null);
+  const isSkippingRef = useRef(false);
 
   const handlePauseResume = () => setPaused(prev => !prev);
 
@@ -32,9 +33,11 @@ function App() {
     }
 
     if (started && executingRef.current) {
+      isSkippingRef.current = true;
       cancelCurrentExecution();
       await new Promise(resolve => setTimeout(resolve, 250));
       await executeWithoutAnimation();
+      isSkippingRef.current = false;
       return;
     }
 
@@ -92,6 +95,12 @@ function App() {
       }
 
       if (result && result.cancelled) {
+        if (!isSkippingRef.current && initialCellRef.current) {
+          setSelectedCell({ 
+            row: initialCellRef.current.row, 
+            col: initialCellRef.current.col 
+          });
+        }
         return;
       }
 
@@ -202,6 +211,13 @@ function App() {
     setTime(0);
     setStart(false);
     executingRef.current = false;
+    
+    if (initialCellRef.current) {
+      setSelectedCell({ 
+        row: initialCellRef.current.row, 
+        col: initialCellRef.current.col 
+      });
+    }
   };
 
   const resetearTodo = () => {
@@ -214,6 +230,7 @@ function App() {
     setTime(0);
     setStart(false);
     executingRef.current = false;
+    initialCellRef.current = null;
   };
 
   return (
