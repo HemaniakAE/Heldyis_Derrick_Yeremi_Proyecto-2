@@ -12,12 +12,12 @@ function ChessBoard({ size, selectedCell, onCellClick, board, backtrackedCells =
         const row = Math.floor(idx / size);
         const col = idx % size;
         const isBlack = (row + col) % 2 === 1;
-  const isSelected = selectedCell?.row === row && selectedCell?.col === col;
-  const hasBoard = board && board.length > 0;
-  const moveNumber = hasBoard ? board[row][col] : null;
-  const isVisited = hasBoard && typeof moveNumber === 'number' && moveNumber > 0;
-  const key = `${row}-${col}`;
-  const isBacktracked = !isVisited && backtrackedCells && backtrackedCells.includes(key);
+        const isSelected = selectedCell?.row === row && selectedCell?.col === col;
+        const hasBoard = board && board.length > 0;
+        const moveNumber = hasBoard ? board[row][col] : null;
+        const isVisited = hasBoard && typeof moveNumber === 'number' && moveNumber > 0;
+        const key = `${row}-${col}`;
+        const isBacktracked = !isVisited && backtrackedCells && backtrackedCells.includes(key);
 
         return (
           <div

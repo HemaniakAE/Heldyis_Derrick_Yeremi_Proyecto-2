@@ -30,10 +30,8 @@ async function solve(bo, srow, scol, n, counter, closed, statistics, onSelect, d
     if (validateMove(bo, new_x, new_y, n)) {
       statistics.moveTries++;
 
-      // mark the cell with the move number
       bo[new_x][new_y] = counter;
 
-      // notify UI about the selected cell and current board so React can render
       try {
         if (typeof onSelect === "function") {
           const snapshot = bo.map((r) => r.slice());
@@ -42,7 +40,7 @@ async function solve(bo, srow, scol, n, counter, closed, statistics, onSelect, d
           else await sleep(0);
         }
       } catch (e) {
-        // ignore UI callback errors
+
       }
 
       if (await solve(bo, srow, scol, n, counter + 1, closed, statistics, onSelect, delay, new_x, new_y)) {
@@ -52,7 +50,7 @@ async function solve(bo, srow, scol, n, counter, closed, statistics, onSelect, d
       statistics.backtracks++;
       bo[new_x][new_y] = 0;
 
-      // notify UI about the backtrack (board updated) and which cell was undone
+
       try {
         if (typeof onSelect === "function") {
           const snapshotAfterBack = bo.map((r) => r.slice());
@@ -61,7 +59,7 @@ async function solve(bo, srow, scol, n, counter, closed, statistics, onSelect, d
           else await sleep(0);
         }
       } catch (e) {
-        // ignore
+
       }
     }
   }
@@ -75,7 +73,6 @@ export async function solveKnightsTour(n, start_row, start_col, onSelect = () =>
   const startTime = performance.now();
   board[start_row][start_col] = 1;
 
-    // notify starting cell immediately (include board snapshot)
     try {
       if (typeof onSelect === "function") {
         const snapshot = board.map((r) => r.slice());
@@ -112,7 +109,7 @@ export async function solveKnightsTourClosed(n, start_row, start_col, onSelect =
       else await sleep(0);
     }
   } catch (e) {}
-    // notify starting cell immediately (include board snapshot)
+
     try {
       if (typeof onSelect === "function") {
         const snapshot = board.map((r) => r.slice());

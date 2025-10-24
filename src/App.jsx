@@ -35,7 +35,7 @@ function App() {
     // Visualization delay in ms (0 = instant, increase to slow down)
     const visualizationDelay = 40;
 
-  // clear previous board/state while running
+  // Resetea el tablero y la tabla de estadísticas
   setBoard([]);
   setBacktrackedCells([]);
   setMoves(0);
@@ -44,12 +44,10 @@ function App() {
 
     let result;
 
-    // onSelect handler used by the backtracking algorithm to update UI during animation
     const onSelectHandler = async (info) => {
-      // info: { row, col, board, move, backtracked }
       if (info?.board) {
         setBoard(info.board);
-        // remove any cells from backtracked that have been visited again
+        // Remueve las casillas que no han sido visitadas
         setBacktrackedCells((prev) => prev.filter((k) => {
           const [r, c] = k.split('-').map(Number);
           return !(info.board[r] && info.board[r][c] > 0);
@@ -65,7 +63,6 @@ function App() {
         setBacktrackedCells((prev) => (prev.includes(key) ? prev : [...prev, key]));
       }
 
-      // return a resolved promise so the algorithm can await this handler
       return Promise.resolve();
     };
 
