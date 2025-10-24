@@ -3,7 +3,7 @@
     border: 2px solid #333;
     padding: 1.4em;
     border-radius: 10px;
-    width: 270px;
+    width: 300px;
 }
 
 .control-panel h2 {
@@ -45,15 +45,16 @@
 }
 
 .buttons {
+    margin-right: 1em;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 0.5em;
 }
 
-
 .control-panel select {
-    margin-right: 4.6em;
+    margin-right: 5.5em;
+    margin-top: 0.5em;
     font-size: 1em;
     padding: 0.2em 0.3em;
     border-radius: 5px;
