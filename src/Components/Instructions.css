@@ -17,7 +17,7 @@
 
 .instructions-box ul {
     padding-left: 1.2em;
-    margin: 0; ;
+    margin: 0;
 }
 
 .instructions-box li {
@@ -41,4 +41,69 @@
 
 .lang-switch:hover {
   background: #adaaaa;
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .instructions-box {
+    width: 300px;
+    height: auto;
+    min-height: 200px;
+    max-height: 280px;
+    padding: 0.8em;
+    margin-bottom: 0;
+    border: 1px solid #333;
+    overflow-y: auto;
+  }
+
+  .instructions-box h2 {
+    font-size: 0.95em;
+    margin-bottom: 0.5em;
+  }
+
+  .instructions-box ul {
+    padding-left: 1em;
+  }
+
+  .instructions-box li {
+    margin-bottom: 0.4em;
+    font-size: 0.85em;
+    line-height: 1.3;
+  }
+
+  .lang-switch {
+    top: 8px;
+    right: 8px;
+    font-size: 0.8em;
+    padding: 2px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .instructions-box {
+    width: 260px;
+    max-height: 240px;
+    padding: 0.6em;
+  }
+
+  .instructions-box h2 {
+    font-size: 0.9em;
+    margin-bottom: 0.4em;
+  }
+
+  .instructions-box li {
+    font-size: 0.8em;
+    margin-bottom: 0.35em;
+    line-height: 1.25;
+  }
+
+  .lang-switch {
+    top: 6px;
+    right: 6px;
+    font-size: 0.75em;
+    padding: 1px 5px;
+  }
 }

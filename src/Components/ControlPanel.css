@@ -41,13 +41,13 @@
 .actions {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 0.5em;
 }
 
 .buttons {
-  margin-right: 1em;
+  margin-right: 0;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -120,4 +120,100 @@
   background: linear-gradient(135deg, #1a1a1a, #333333);
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(0, 110, 255, 0.5);
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .control-panel {
+    width: 300px;
+    padding: 0.8em;
+    border: 1px solid #333;
+  }
+
+  .control-panel h2 {
+    font-size: 1em;
+    margin-bottom: 0.3em;
+  }
+
+  .control-panel button {
+    margin: 0.3em;
+    padding: 0.4em 0.8em;
+    font-size: 0.95em;
+    border-radius: 8px;
+  }
+
+  .control-panel button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 8px #313439;
+  }
+
+  .buttons {
+    margin-right: 0;
+    gap: 0.3em;
+  }
+
+  .actions {
+    align-items: center;
+    gap: 0.3em;
+  }
+
+  .control-panel select {
+    max-width: 180px;
+    margin-top: 0.3em;
+    padding: 0.5em 2em 0.5em 0.8em;
+    font-size: 0.9em;
+    border-radius: 6px;
+    border: 1px solid #000;
+  }
+
+  .control-panel select:hover {
+    transform: scale(1.05);
+  }
+
+  .selects {
+    gap: 0.5em;
+  }
+
+  .control-panel select option {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .control-panel {
+    width: 260px;
+    padding: 0.6em;
+  }
+
+  .control-panel h2 {
+    font-size: 0.95em;
+  }
+
+  .control-panel button {
+    margin: 0.25em;
+    padding: 0.35em 0.7em;
+    font-size: 0.85em;
+  }
+
+  .control-panel button:hover {
+    transform: scale(1.05);
+  }
+
+  .buttons {
+    margin-right: 0.3em;
+    gap: 0.25em;
+  }
+
+  .control-panel select {
+    max-width: 160px;
+    padding: 0.45em 1.8em 0.45em 0.7em;
+    font-size: 0.85em;
+  }
+
+  .selects {
+    gap: 0.4em;
+  }
 }

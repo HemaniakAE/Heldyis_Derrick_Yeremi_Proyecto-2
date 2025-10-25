@@ -21,3 +21,50 @@
   padding: 0.5em 2em;
   color: #000000;
 }
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .stats-board {
+    min-width: 300px;
+    width: 300px;
+    padding: 0.8em;
+    border: 1px solid #333;
+  }
+
+  .stats-board h2 {
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  .stats-board table {
+    font-size: 0.9em;
+  }
+
+  .stats-board td {
+    padding: 0.4em 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-board {
+    min-width: 260px;
+    width: 260px;
+    padding: 0.6em;
+  }
+
+  .stats-board h2 {
+    font-size: 0.95em;
+    margin-bottom: 0.4em;
+  }
+
+  .stats-board table {
+    font-size: 0.85em;
+  }
+
+  .stats-board td {
+    padding: 0.35em 0.8em;
+  }
+}

@@ -52,3 +52,53 @@
   border: 1px solid black;
   color: white;
 }
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .chessboard {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #333;
+  }
+
+  .chessboard-cell {
+    font-size: 0.7em;
+  }
+
+  .chessboard-cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 4px rgb(0, 191, 255);
+  }
+
+  .chessboard-cell.select {
+    outline: 2px solid rgba(12, 141, 216, 0.705);
+  }
+
+  .chessboard-cell.visited,
+  .chessboard-cell.backtracked {
+    border: 0.5px solid black;
+  }
+
+  /* Reducir tamaño de números */
+  .chessboard-cell span {
+    font-size: 0.65em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .chessboard {
+    width: 260px;
+    height: 260px;
+  }
+
+  .chessboard-cell {
+    font-size: 0.6em;
+  }
+
+  .chessboard-cell span {
+    font-size: 0.6em !important;
+  }
+}

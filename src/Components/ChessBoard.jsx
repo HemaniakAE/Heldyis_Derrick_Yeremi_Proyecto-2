@@ -3,6 +3,21 @@ import { GiChessKnight } from "react-icons/gi";
 import "./ChessBoard.css";
 
 function ChessBoard({ size, selectedCell, onCellClick, board, backtrackedCells = [] }) {
+
+  //Adaptación con IA para utilizar el programa en celulares
+
+  // Calcular tamaño del caballo basado en el tamaño del tablero
+  const getKnightSize = () => {
+    if (window.innerWidth <= 480) {
+      return 260 / size * 0.6; // 60% del tamaño de celda en móviles pequeños
+    } else if (window.innerWidth <= 768) {
+      return 300 / size * 0.65; // 65% del tamaño de celda en móviles
+    }
+    return 64; // Tamaño original en desktop
+  };
+
+  const knightSize = getKnightSize();
+
   return (
     <div
       className="chessboard"
@@ -39,7 +54,7 @@ function ChessBoard({ size, selectedCell, onCellClick, board, backtrackedCells =
 
             {isSelected && (
               <GiChessKnight
-                size={64}
+                size={knightSize}
                 color={isVisited ? 'white' : (isBlack ? "white" : "black")}
                 strokeWidth={2.5}
               />
