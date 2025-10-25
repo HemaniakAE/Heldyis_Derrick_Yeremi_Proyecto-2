@@ -11,6 +11,7 @@ import { solveKnightsTour, solveKnightsTourClosed, cancelCurrentExecution } from
 function App() {
   const [started, setStart] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [calculating, setCalculating] = useState(false);
   const [size, setSize] = useState(7);
   const [mode, setMode] = useState("Open");
   const [selectedCell, setSelectedCell] = useState(null);
@@ -56,8 +57,19 @@ function App() {
     if (started && executingRef.current) {
       isSkippingRef.current = true;
       cancelCurrentExecution();
-      await new Promise(resolve => setTimeout(resolve, 250));
+      
+      // Esperar un poco para que se cancele la ejecución actual
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Mostrar indicador de carga
+      setCalculating(true);
+      
+      // Dar tiempo al navegador para renderizar el indicador
+      await new Promise(resolve => setTimeout(resolve, 50));
+      
       await executeWithoutAnimation();
+      
+      setCalculating(false);
       isSkippingRef.current = false;
       return;
     }
@@ -178,11 +190,9 @@ function App() {
     setTime(0);
     setSelectedCell({ row: startRow, col: startCol });
 
-    if (mode === "Close") {
-      await new Promise(resolve => setTimeout(resolve, 100));
-    }
-
-    await new Promise(resolve => setTimeout(resolve, 150));
+    // Permitir que React actualice el DOM
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    await new Promise(resolve => requestAnimationFrame(resolve));
 
     let result;
     try {
@@ -236,6 +246,7 @@ function App() {
     setTime(0);
     setStart(false);
     executingRef.current = false;
+    setCalculating(false);
     
     if (initialCellRef.current) {
       setSelectedCell({ 
@@ -256,12 +267,43 @@ function App() {
     setStart(false);
     executingRef.current = false;
     initialCellRef.current = null;
+    setCalculating(false);
   };
 
   return (
     <div className="App">
       <Header />
       <ResetButton onReset={resetearTodo} />
+
+      {calculating && ( //Indicador de carga durante el skip
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          backgroundColor: 'rgba(0, 0, 0, 0.85)',
+          color: 'white',
+          padding: '15px 30px',
+          borderRadius: '8px',
+          zIndex: 999,
+          fontSize: '16px',
+          fontWeight: 'bold',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px'
+        }}>
+          <div style={{
+            width: '20px',
+            height: '20px',
+            border: '3px solid rgba(255, 255, 255, 0.3)',
+            borderTop: '3px solid white',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }}></div>
+          Terminando recorrido...
+        </div>
+      )}
 
       <div className="left-area">
         <Instructions />
@@ -291,6 +333,13 @@ function App() {
           backtrackedCells={backtrackedCells}
         />
       </div>
+
+      <style>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
