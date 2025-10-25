@@ -49,6 +49,11 @@ function App() {
   };
 
   const handleStartSkip = async () => {
+    if (paused) {
+      alert("No puede saltar mientras la ejecución está pausada. Presione reanudar primero.");
+      return;
+    }
+
     if (!selectedCell) {
       alert("Seleccione una casilla inicial en el tablero.");
       return;
@@ -58,13 +63,12 @@ function App() {
       isSkippingRef.current = true;
       cancelCurrentExecution();
       
-      // Esperar un poco para que se cancele la ejecución actual
+      // Espera a que se cancele la ejecución actual
       await new Promise(resolve => setTimeout(resolve, 100));
       
-      // Mostrar indicador de carga
       setCalculating(true);
       
-      // Dar tiempo al navegador para renderizar el indicador
+      // Le da espacio al navegador para renderizar el cargador del skip
       await new Promise(resolve => setTimeout(resolve, 50));
       
       await executeWithoutAnimation();
@@ -238,6 +242,11 @@ function App() {
   };
 
   const handleReboot = () => {
+    if (paused) {
+      alert("No puede reiniciar mientras la ejecución está pausada. Presione reanudar primero.");
+      return;
+    }
+
     cancelCurrentExecution();
     setBoard([]);
     setBacktrackedCells([]);
@@ -257,6 +266,11 @@ function App() {
   };
 
   const resetearTodo = () => {
+    if (paused) {
+      alert("No puede resetear mientras la ejecución está pausada. Presione reanudar primero.");
+      return;
+    }
+
     cancelCurrentExecution();
     setBoard([]);
     setSelectedCell(null);
