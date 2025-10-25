@@ -20,7 +20,7 @@ main {
 
 .right-area {
   position: absolute;
-  top: 54%;
+  top: 56.5%;
   right: 0;
   transform: translateY(-50%);
   z-index: 100;
@@ -33,7 +33,7 @@ main {
 
 .left-area {
   position: absolute;
-  top: 49%;
+  top: 54%;
   left: 0;
   transform: translateY(-50%);
   z-index: 100;
@@ -82,5 +82,181 @@ main {
 @media (prefers-color-scheme: light) {
   .reset-button img {
     filter: invert(0);
+  }
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  #root {
+    padding: 0.25rem;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .App {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 70px;
+    min-height: 100vh;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  /* Reset Button - Fijo arriba a la izquierda */
+  .reset-button {
+    position: fixed;
+    left: 8px;
+    top: 12px;
+    width: 40px;
+    height: 40px;
+    transform: none;
+    padding: 4px;
+    z-index: 1001;
+  }
+
+  .reset-button:hover {
+    transform: scale(1.1);
+  }
+
+  .reset-button img {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ChessBoard - Compacto y centrado */
+  .card {
+    position: static;
+    width: auto;
+    max-width: 320px;
+    padding: 0.25em;
+    margin: 0 auto 0.5rem auto;
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Hacer el tablero más pequeño */
+  .card > * {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  /* Instructions - Compacto */
+  .left-area {
+    position: static;
+    transform: none;
+    padding: 0;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 0.5rem auto;
+    order: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Right area - Compacto */
+  .right-area {
+    position: static;
+    transform: none;
+    padding: 0;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 0.5rem auto;
+    order: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  /* Control Panel aparece primero dentro de right-area */
+  .right-area > div:nth-child(2) {
+    order: -1;
+  }
+
+  /* Stats Board aparece después */
+  .right-area > div:nth-child(1) {
+    order: 1;
+  }
+}
+
+/* Pantallas muy pequeñas (smartphones pequeños) */
+@media (max-width: 480px) {
+  #root {
+    padding: 0.25rem;
+  }
+
+  .App {
+    padding-top: 65px;
+    gap: 0.5rem;
+  }
+
+  .reset-button {
+    left: 6px;
+    top: 10px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .reset-button img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .card {
+    max-width: 280px;
+    padding: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+
+  .card > * {
+    max-width: 260px;
+    max-height: 260px;
+  }
+
+  .left-area,
+  .right-area {
+    max-width: 280px;
+    margin-bottom: 0.4rem;
+  }
+
+  .right-area {
+    gap: 0.5rem;
+  }
+}
+
+/* Tablets y pantallas medianas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #root {
+    padding: 1.5rem;
+  }
+
+  .right-area {
+    padding-right: 3%;
+    gap: 1.5em;
+  }
+
+  .left-area {
+    padding-left: 2%;
+  }
+
+  .reset-button {
+    left: 30px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .reset-button img {
+    width: 80px;
+    height: 80px;
   }
 }

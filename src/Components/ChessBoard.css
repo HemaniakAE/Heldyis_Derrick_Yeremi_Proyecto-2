@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: repeat(var(--size), 1fr);
   grid-template-rows: repeat(var(--size), 1fr);
-  width: 520px;
-  height: 520px;
+  width: 560px;
+  height: 560px;
   border: 2px solid #333;
 }
 
@@ -17,7 +17,6 @@
   height: 100%;
   box-sizing: border-box;
   justify-content: center;
-  font-size: 2em;
   align-items: center;
   cursor: pointer;
   user-select: none;
@@ -31,7 +30,7 @@
 }
 
 .chessboard-cell.white {
-  background: beige;
+  background: rgb(255, 255, 255);
 }
 
 .chessboard-cell.black {
@@ -39,5 +38,67 @@
 }
 
 .chessboard-cell.select {
-  outline: 3px solid blue;
+  outline: 3px solid rgba(12, 141, 216, 0.705);
+}
+
+.chessboard-cell.visited {
+  background: #4caf50 !important;
+  border: 1px solid black;
+  color: white;
+}
+
+.chessboard-cell.backtracked {
+  background: #e53935 !important;
+  border: 1px solid black;
+  color: white;
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .chessboard {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #333;
+  }
+
+  .chessboard-cell {
+    font-size: 0.7em;
+  }
+
+  .chessboard-cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 4px rgb(0, 191, 255);
+  }
+
+  .chessboard-cell.select {
+    outline: 2px solid rgba(12, 141, 216, 0.705);
+  }
+
+  .chessboard-cell.visited,
+  .chessboard-cell.backtracked {
+    border: 0.5px solid black;
+  }
+
+  /* Reducir tamaño de números */
+  .chessboard-cell span {
+    font-size: 0.65em !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .chessboard {
+    width: 260px;
+    height: 260px;
+  }
+
+  .chessboard-cell {
+    font-size: 0.6em;
+  }
+
+  .chessboard-cell span {
+    font-size: 0.6em !important;
+  }
 }

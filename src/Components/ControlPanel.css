@@ -1,71 +1,219 @@
 .control-panel {
-    background: #ffffff;
-    border: 2px solid #333;
-    padding: 1.4em;
-    border-radius: 10px;
-    width: 270px;
+  background: #ffffff;
+  border: 2px solid #333;
+  padding: 1.4em;
+  border-radius: 10px;
+  width: 300px;
 }
 
 .control-panel h2 {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 1.3em;
-    color: #000000;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.3em;
+  color: #000000;
 }
 
 .control-panel button {
-    margin: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 10px;
-    transition: 0.25s;
-    background-color: #000000;
-    color: #ffffff;
-    cursor: pointer;
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  font-size: 1.3em;
+  border: none;
+  border-radius: 10px;
+  transition: 0.25s;
+  background: linear-gradient(135deg, #000000, #383838);
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .control-panel button:hover {
-    background-color: #555;
-    transform: scale(1.2);
-    box-shadow: 0 0 12px #313439;
+  background: linear-gradient(135deg, #1a1a1a, #7a7a7a);
+  transform: scale(1.2);
+  box-shadow: 0 0 12px #313439;
 }
 
 .control-panel button:active {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+  background-color: #ffffff;
+  background: linear-gradient(135deg, #000000, #222222);
+  transform: scale(1);
+  color: rgb(0, 0, 0);
 }
 
 .actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
 }
 
 .buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.5em;
+  margin-right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5em;
 }
 
-
 .control-panel select {
-    margin-right: 6.5em;
-    font-size: 1em;
-    padding: 0.2em 0.3em;
-    border-radius: 5px;
-    border: 1px solid #333;
-    cursor: pointer;
-    background-color: #000000;
-    color: white    ;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 0.5em;
+  padding: 0.6em 2.5em 0.6em 1em;
+  font-size: 1em;
+  border-radius: 8px;
+  border: 2px solid #000;
+  background: linear-gradient(135deg, #000000, #1f1f1f);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.control-panel select::after {
+  content: "▼";
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #ffffff;
+}
+
+.selects {
+  display: flex;
+  margin-right: 0em;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.control-panel select:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, #000000, #222222);
+}
+
+.control-panel select:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.8);
+}
+
+.selects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8em;
+  width: 100%;
+}
+
+.control-panel select option {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1em;
+  padding: 0.5em;
 }
 
 .control-panel select:hover {
-    background-color: #555;
-    color: #ffffff;
-    transform: scale(1);
-    box-shadow: 0 0 12px #313439
+  background: linear-gradient(135deg, #1a1a1a, #333333);
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 110, 255, 0.5);
+}
+
+/* ========================================
+   DISEÑO RESPONSIVO PARA MÓVILES
+   ======================================== */
+
+@media (max-width: 768px) {
+  .control-panel {
+    width: 300px;
+    padding: 0.8em;
+    border: 1px solid #333;
+  }
+
+  .control-panel h2 {
+    font-size: 1em;
+    margin-bottom: 0.3em;
+  }
+
+  .control-panel button {
+    margin: 0.3em;
+    padding: 0.4em 0.8em;
+    font-size: 0.95em;
+    border-radius: 8px;
+  }
+
+  .control-panel button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 8px #313439;
+  }
+
+  .buttons {
+    margin-right: 0;
+    gap: 0.3em;
+  }
+
+  .actions {
+    align-items: center;
+    gap: 0.3em;
+  }
+
+  .control-panel select {
+    max-width: 180px;
+    margin-top: 0.3em;
+    padding: 0.5em 2em 0.5em 0.8em;
+    font-size: 0.9em;
+    border-radius: 6px;
+    border: 1px solid #000;
+  }
+
+  .control-panel select:hover {
+    transform: scale(1.05);
+  }
+
+  .selects {
+    gap: 0.5em;
+  }
+
+  .control-panel select option {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .control-panel {
+    width: 260px;
+    padding: 0.6em;
+  }
+
+  .control-panel h2 {
+    font-size: 0.95em;
+  }
+
+  .control-panel button {
+    margin: 0.25em;
+    padding: 0.35em 0.7em;
+    font-size: 0.85em;
+  }
+
+  .control-panel button:hover {
+    transform: scale(1.05);
+  }
+
+  .buttons {
+    margin-right: 0.3em;
+    gap: 0.25em;
+  }
+
+  .control-panel select {
+    max-width: 160px;
+    padding: 0.45em 1.8em 0.45em 0.7em;
+    font-size: 0.85em;
+  }
+
+  .selects {
+    gap: 0.4em;
+  }
 }
