@@ -1,3 +1,17 @@
+/*
+  ControlPanel.jsx
+
+  Componente presentacional que expone controles para el usuario:
+  - Selección de tamaño de tablero y modo (Open/Close).
+  - Botones para iniciar/saltar, pausar/reanudar y reiniciar.
+
+  Props:
+  - Start, Pause, Reboot: callbacks proporcionados por el padre (App).
+  - paused, started: flags para ajustar iconos y títulos.
+  - size, setSize, mode, setMode: control de parámetros del algoritmo.
+
+  Nota: Este archivo solo ejecuta los callbacks recibidos; no contiene lógica de algoritmo.
+*/
 import React from "react";
 import './ControlPanel.css'
 import { VscDebugStart } from "react-icons/vsc";

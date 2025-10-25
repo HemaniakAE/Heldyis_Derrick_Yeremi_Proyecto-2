@@ -1,3 +1,22 @@
+/*
+  ChessBoard.jsx
+
+  Componente que renderiza la cuadrícula del tablero y el caballo.
+
+  Props principales:
+  - size: entero, dimensión del tablero (n x n).
+  - selectedCell: {row, col} — dónde dibujar el icono del caballo actualmente.
+  - onCellClick: callback para seleccionar la celda inicial (solo antes de ejecutar).
+  - board: matriz de enteros con el número de paso para cada celda (0 = no visitado).
+  - backtrackedCells: array de claves "r-c" que indica casillas que fueron deshechas por el algoritmo.
+
+  Comportamiento:
+  - Muestra el número de paso dentro de la casilla si existe (>0).
+  - Aplica clases CSS (`visited`, `backtracked`, `select`) para estilos visuales.
+  - No muta el `board`: solo representa el estado recibido por props.
+
+  Nota: Añadimos únicamente comentarios; no se modifica la lógica.
+*/
 import React from "react";
 import { GiChessKnight } from "react-icons/gi";
 import "./ChessBoard.css";

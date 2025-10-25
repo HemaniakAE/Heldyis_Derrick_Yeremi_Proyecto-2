@@ -1,3 +1,16 @@
+/*
+  App.jsx
+
+  Componente raíz que orquesta la aplicación.
+
+  Resumen de responsabilidades:
+  - Mantener el estado global de la aplicación (tablero, celda seleccionada, estadísticas y flags de ejecución).
+  - Orquestar la ejecución del algoritmo de backtracking (con o sin animación).
+  - Proveer un handler `onSelectHandler` que recibe snapshots del algoritmo para actualizar la UI.
+  - Manejar cancelación/skip/pausa mediante refs (`executingRef`, `isSkippingRef`, `pausedRef`).
+
+  Importante: Solo se añaden comentarios en este archivo — no se cambia ninguna lógica ni comportamiento.
+*/
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Header from './Components/Header';
@@ -30,6 +43,7 @@ function App() {
     pausedRef.current = paused;
   }, [paused]);
 
+  // Handlers para los controles del panel
   const handlePauseResume = () => setPaused(prev => !prev);
 
   const handleSizeChange = (newSize) => {
@@ -40,6 +54,7 @@ function App() {
     setSize(newSize);
   };
 
+  // Handler para cambiar el modo (Open/Close)
   const handleModeChange = (newMode) => {
     if (executingRef.current || board.length > 0) {
       alert("No puede cambiar el modo durante o después de la ejecución. Presione el botón de reiniciar primero.");
@@ -48,6 +63,7 @@ function App() {
     setMode(newMode);
   };
 
+  // Handler para iniciar o saltar la ejecución
   const handleStartSkip = async () => {
     if (paused) {
       alert("No puede saltar mientras la ejecución está pausada. Presione reanudar primero.");
@@ -59,6 +75,7 @@ function App() {
       return;
     }
 
+    // Lógica para manejar el skip durante la ejecución
     if (started && executingRef.current) {
       isSkippingRef.current = true;
       cancelCurrentExecution();
@@ -71,6 +88,7 @@ function App() {
       // Le da espacio al navegador para renderizar el cargador del skip
       await new Promise(resolve => setTimeout(resolve, 50));
       
+      // Ejecuta el algoritmo sin animación para completar el recorrido rápidamente
       await executeWithoutAnimation();
       
       setCalculating(false);
@@ -82,6 +100,8 @@ function App() {
     await executeWithAnimation();
   };
 
+
+  // Lógica para ejecutar el algoritmo con animación
   const executeWithAnimation = async () => {
     if (executingRef.current) return;
     
@@ -101,9 +121,10 @@ function App() {
       while (pausedRef.current && executingRef.current && !isSkippingRef.current) {
         await new Promise(res => setTimeout(res, 50));
       }
-
+      // Actualiza el estado con el snapshot recibido del algoritmo
       if (info?.board) setBoard(info.board);
 
+      // Actualiza las celdas backtracked
       if (info?.backtracked) {
         const key = `${info.backtracked.row}-${info.backtracked.col}`;
         setBacktrackedCells((prev) =>
@@ -111,6 +132,7 @@ function App() {
         );
       }
 
+      // Limpia las celdas que ya no están marcadas como backtracked
       if (info?.board) {
         setBacktrackedCells((prev) =>
           prev.filter((k) => {
@@ -120,6 +142,7 @@ function App() {
         );
       }
 
+      // Actualiza la celda seleccionada
       if (typeof info?.row === "number" && typeof info?.col === "number") {
         setSelectedCell({ row: info.row, col: info.col });
       }
@@ -129,12 +152,13 @@ function App() {
 
     let result;
     try {
-      if (mode === "Open") {
+      if (mode === "Open") {// Modo abierto
         result = await solveKnightsTour(size, startRow, startCol, onSelectHandler, visualizationDelay);
       } else {
         result = await solveKnightsTourClosed(size, startRow, startCol, onSelectHandler, visualizationDelay);
       }
 
+      // Manejo del caso cuando la ejecución fue cancelada (skip)
       if (result && result.cancelled) {
         if (!isSkippingRef.current && initialCellRef.current) {
           setSelectedCell({ 
@@ -145,13 +169,14 @@ function App() {
         return;
       }
 
+      // Manejo del resultado final
       if (result && result.success) {
         setBoard(result.board);
         setMoves(result.statistics.moveTries);
         setBacktracks(result.statistics.backtracks);
         setTime(result.executionTime.toFixed(2));
         setBacktrackedCells([]);
-        
+        // Selecciona la última celda del recorrido
         const maxValue = size * size;
         let lastRow = -1, lastCol = -1;
         for (let r = 0; r < size; r++) {
@@ -165,10 +190,10 @@ function App() {
           if (lastRow !== -1) break;
         }
         
-        if (lastRow !== -1 && lastCol !== -1) {
+        if (lastRow !== -1 && lastCol !== -1) {// Selecciona la última celda
           setSelectedCell({ row: lastRow, col: lastCol });
         }
-      } else if (result && !result.cancelled) {
+      } else if (result && !result.cancelled) {// No se encontró solución
         alert("No se encontró una solución para este punto de inicio.");
       }
     } catch (error) {
@@ -179,6 +204,7 @@ function App() {
     }
   };
 
+  // Lógica para ejecutar el algoritmo sin animación (skip)
   const executeWithoutAnimation = async () => {
     if (!initialCellRef.current) {
       return;
@@ -206,6 +232,7 @@ function App() {
         result = await solveKnightsTourClosed(size, startRow, startCol, undefined, 0);
       }
 
+      // Manejo del resultado final
       if (result && result.success) {
         setBoard(result.board);
         setMoves(result.statistics.moveTries);
@@ -213,6 +240,7 @@ function App() {
         setTime(result.executionTime.toFixed(2));
         setBacktrackedCells([]);
         
+        // Selecciona la última celda del recorrido
         const maxValue = size * size;
         let lastRow = -1, lastCol = -1;
         for (let r = 0; r < size; r++) {
@@ -241,6 +269,7 @@ function App() {
     }
   };
 
+  // Handler para reiniciar el estado de la aplicación
   const handleReboot = () => {
     if (paused) {
       alert("No puede reiniciar mientras la ejecución está pausada. Presione reanudar primero.");
@@ -265,6 +294,7 @@ function App() {
     }
   };
 
+  // Handler para el botón de reset externo
   const resetearTodo = () => {
     if (paused) {
       alert("No puede resetear mientras la ejecución está pausada. Presione reanudar primero.");
