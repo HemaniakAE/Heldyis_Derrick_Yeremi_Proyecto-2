@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
 import Header from './Components/Header';
 import ChessBoard from './Components/ChessBoard';
@@ -23,6 +23,11 @@ function App() {
   const executingRef = useRef(false);
   const initialCellRef = useRef(null);
   const isSkippingRef = useRef(false);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    pausedRef.current = paused;
+  }, [paused]);
 
   const handlePauseResume = () => setPaused(prev => !prev);
 
@@ -77,6 +82,10 @@ function App() {
     executingRef.current = true;
 
     const onSelectHandler = async (info) => {
+      while (pausedRef.current && executingRef.current && !isSkippingRef.current) {
+        await new Promise(res => setTimeout(res, 50));
+      }
+
       if (info?.board) setBoard(info.board);
 
       if (info?.backtracked) {
